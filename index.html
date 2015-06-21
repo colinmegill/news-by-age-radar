@@ -19,7 +19,7 @@
   a {
     text-decoration: none;
   }
-  .legend {
+  ul {
     list-style-type: none;
   }
   .radar-chart .area {
@@ -42,25 +42,27 @@
 </style>
 
 <body>
-<h1>Primary Source for news consumption across age cohorts</h1>
+<a href="https://github.com/colinmegill/news-by-age-radar"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+<h1>TV news in decline: <span> primary source of news consumption across 5 age cohorts </span></h1>
+
 <div style="position: absolute; width: 600px; top: 120px " class="radarVisualization">
   
 </div>
-<div style="position: absolute; left: 700px; top: 120px; width: 600px; display: inline"> 
-  <a href="http://www.digitalnewsreport.org/survey/2015/executive-summary-and-key-findings-2015/"> See the original data at Reuters</a> 
-  <ul style=""> 
-    <li class="text"> Each line represents 10%, there are 6 lines, <em> the blue point on the top  means that 60% of people 18-24 get their news primarily online.</em> We can see that less than 30% of this group gets their news primarily from TV (there's hope). </li>
-    <li class="text">The original chart isn't *terrible*, they could have chosen 5 pie charts and wisely did not, but it's still worthy of scorn. Noteably, they could have used stacked bar chart and mapped color + texture to media type and made age the x axis (what users will expect), which would have made comparison easier. The arrow on the top is also misleading and should not have been added, as the categories on the x axis are ordinal, not quantitative.</li> 
-    <li class="text"> An interactive radar chart makes visual comparisons easier and was more fun, but the stacked bar is the more conservative choice. Should be numbers on the axes but I did this in about an hour, so I called it a night. PR them if you like: <a href="https://github.com/colinmegill/news-by-age-radar">https://github.com/colinmegill/news-by-age-radar</a>. Someone already figured out the math: <a href="http://bl.ocks.org/nbremer/6506614">http://bl.ocks.org/nbremer/6506614</a>. Also, the colors should match the original for easy comparison, but I used a simple D3 scale for that.</li>
-  </ul>
-  <ul class="legend">
+<div style="position: absolute; left: 700px; top: 120px; width: 600px; display: inline">
+    <ul class="legend">
     <li><div style="height:20px; width:20px; background-color: rgb(31, 119, 180); display: inline-block; position: relative; top: 5px;"></div> 18 - 24</li>
     <li><div style="height:20px; width:20px; background-color: rgb(255, 127, 14); display: inline-block; position: relative; top: 5px;"></div> 25-34</li>
     <li><div style="height:20px; width:20px; background-color: rgb(44, 160, 44); display: inline-block; position: relative; top: 5px;"></div> 35-44</li>
     <li><div style="height:20px; width:20px; background-color: rgb(214, 39, 40); display: inline-block; position: relative; top: 5px;"></div> 45-54</li>
     <li><div style="height:20px; width:20px; background-color: rgb(148, 103, 189); display: inline-block; position: relative; top: 5px;"></div> 55+</li>
+    <li style="margin-top: 40px"><p> Remixed by <a href="https://twitter.com/colinmegill">@colinmegill</a> </p></li>
+    <li><p> <a href="http://www.digitalnewsreport.org/survey/2015/executive-summary-and-key-findings-2015/"> See the original data at Reuters</a> </p></li>
+    <li class="text"> This graphic examines the primary source for news consumption of 5 age based cohorts. Older people watch TV, younger people are online. It's a smooth curve between the two, which visualizes the gradual generational shift towards new media. </li>
+    <li class="text"> Hover on a dot to see the exact percentage. Each ring represents 10%. The blue point on the top means that 60% of people 18-24 get their news primarily online. We can see that less than 30% of this group gets their news primarily from TV. </li>
+    <li class="text"> <a href="https://twitter.com/BenedictEvans/status/612498037882007552">Saw this from @BenedictEvans</a> this evening (6/21/2015). The original chart isn't *terrible*, they could have chosen 5 pie charts and wisely did not, but it's still worthy of scorn. Noteably, they could have used stacked bar chart and mapped color + texture to media type and made age the x axis (what users will expect), which would have made comparison easier. The arrow on the top is also misleading and should not have been added, as the categories on the x axis are ordinal, not quantitative.</li> 
+    <li class="text"> An interactive radar chart makes visual comparisons easier and was more fun, but the stacked bar is the more conservative choice. Should be numbers on the axes but I did this in about an hour, so I called it a night. PR them if you like: <a href="https://github.com/colinmegill/news-by-age-radar">https://github.com/colinmegill/news-by-age-radar</a>. Someone already figured out the math: <a href="http://bl.ocks.org/nbremer/6506614">http://bl.ocks.org/nbremer/6506614</a>. Also, the colors should match the original for easy comparison, but, alas, they do not because using d3.scale was easier.</li>
   </ul>
-  <p> Remixed by <a href="https://twitter.com/colinmegill">@colinmegill</a> </p>
+
 </div>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
@@ -74,6 +76,7 @@ RadarChart.defaultConfig.w = 600;
 RadarChart.defaultConfig.h = 600;
 RadarChart.defaultConfig.axisText = true;
 RadarChart.defaultConfig.axisLine = true;
+RadarChart.defaultConfig.radius = 5;
 RadarChart.defaultConfig.levels = 6;
 
 </script>
