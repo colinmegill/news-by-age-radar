@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 <link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
 
 <style>
@@ -11,10 +10,18 @@
   </style>
 
   <style>
+  body {
+    font-family: helvetica;
+  }
+  li.text {
+    margin-top: 10px;
+  }
   a {
     text-decoration: none;
   }
-
+  .legend {
+    list-style-type: none;
+  }
   .radar-chart .area {
     fill-opacity: 0.7;
   }
@@ -34,28 +41,29 @@
   }
 </style>
 
-
 <body>
-<h1>News consumption across different age groups, by medium</h1>
+<h1>Primary Source for news consumption across age cohorts</h1>
 <div style="position: absolute; width: 600px; top: 120px " class="radarVisualization">
   
 </div>
 <div style="position: absolute; left: 700px; top: 120px; width: 600px; display: inline"> 
   <a href="http://www.digitalnewsreport.org/survey/2015/executive-summary-and-key-findings-2015/"> See the original data at Reuters</a> 
   <ul style=""> 
-    <li> Apologies for the color difference from the original - did this quickly </li>
-    <li> Each line is 10%, there are 6 lines, the blue point on the top edge means that 60% of people 18-24 get their news primarily online. We can see that less than 30% of this group gets their news primarily from TV (there's hope). </li>
-    <li>The original chart isn't *terrible*, they could have chosen 5 pie charts and did not, but they also could have used stacked bar chart, which would have made comparison easier. The arrow on the top is also misleading and should not have been added, as the categories are ordinal, not quantitative. An interactive radar chart makes visual comparisons easier. So would numbers on the axes, which I neglected to add.</li>
+    <li class="text"> Each line represents 10%, there are 6 lines, <em> the blue point on the top  means that 60% of people 18-24 get their news primarily online.</em> We can see that less than 30% of this group gets their news primarily from TV (there's hope). </li>
+    <li class="text">The original chart isn't *terrible*, they could have chosen 5 pie charts and wisely did not, but it's still worthy of scorn. Noteably, they could have used stacked bar chart and mapped color + texture to media type and made age the x axis (what users will expect), which would have made comparison easier. The arrow on the top is also misleading and should not have been added, as the categories on the x axis are ordinal, not quantitative.</li> 
+    <li class="text"> An interactive radar chart makes visual comparisons easier and was more fun, but the stacked bar is the more conservative choice. Should be numbers on the axes but I did this in about an hour, so I called it a night. PR them if you like: <a href="https://github.com/colinmegill/news-by-age-radar">https://github.com/colinmegill/news-by-age-radar</a>. Someone already figured out the math: <a href="http://bl.ocks.org/nbremer/6506614">http://bl.ocks.org/nbremer/6506614</a>. Also, the colors should match the original for easy comparison, but I used a simple D3 scale for that.</li>
+  </ul>
+  <ul class="legend">
     <li><div style="height:20px; width:20px; background-color: rgb(31, 119, 180); display: inline-block; position: relative; top: 5px;"></div> 18 - 24</li>
-    <li><div style="height:20px; width:20px; background-color: rgb(255, 127, 14); display: inline-block; position: relative; top: 5px;"></div> 25-</li>
-    <li><div style="height:20px; width:20px; background-color: rgb(44, 160, 44); display: inline-block; position: relative; top: 5px;"></div></li>
-    <li><div style="height:20px; width:20px; background-color: rgb(214, 39, 40); display: inline-block; position: relative; top: 5px;"></div></li>
-    <li><div style="height:20px; width:20px; background-color: rgb(148, 103, 189); display: inline-block; position: relative; top: 5px;"></div></li>
+    <li><div style="height:20px; width:20px; background-color: rgb(255, 127, 14); display: inline-block; position: relative; top: 5px;"></div> 25-34</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(44, 160, 44); display: inline-block; position: relative; top: 5px;"></div> 35-44</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(214, 39, 40); display: inline-block; position: relative; top: 5px;"></div> 45-54</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(148, 103, 189); display: inline-block; position: relative; top: 5px;"></div> 55+</li>
   </ul>
   <p> Remixed by <a href="https://twitter.com/colinmegill">@colinmegill</a> </p>
 </div>
 
-<script src="http://d3js.org/d3.v3.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
 
 <script>
