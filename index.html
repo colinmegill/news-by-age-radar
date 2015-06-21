@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+<link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
+
+<style>
+  body {
+    padding: 20px;
+  }
+  </style>
+
+  <style>
+  a {
+    text-decoration: none;
+  }
+
+  .radar-chart .area {
+    fill-opacity: 0.7;
+  }
+  .radar-chart.focus .area {
+    fill-opacity: 0.2;
+  }
+  .radar-chart.focus .area.focused {
+    fill-opacity: 0.9;
+  }
+  .area.18to24, .18to24 .circle {
+    fill: #FFD700;
+    stroke: none;
+  }
+  .area.55_plus, .55_plus .circle {
+    fill: #ADD8E6;
+    stroke: none;
+  }
+</style>
+
+
+<body>
+<h1>News consumption across different age groups, by medium</h1>
+<div style="position: absolute; width: 600px; top: 120px " class="radarVisualization">
+  
+</div>
+<div style="position: absolute; left: 700px; top: 120px; width: 600px; display: inline"> 
+  <a href="http://www.digitalnewsreport.org/survey/2015/executive-summary-and-key-findings-2015/"> See the original data at Reuters</a> 
+  <ul style=""> 
+    <li> Apologies for the color difference from the original - did this quickly </li>
+    <li> Each line is 10%, there are 6 lines, the blue point on the top edge means that 60% of people 18-24 get their news primarily online. We can see that less than 30% of this group gets their news primarily from TV (there's hope). </li>
+    <li>The original chart isn't *terrible*, they could have chosen 5 pie charts and did not, but they also could have used stacked bar chart, which would have made comparison easier. The arrow on the top is also misleading and should not have been added, as the categories are ordinal, not quantitative. An interactive radar chart makes visual comparisons easier. So would numbers on the axes, which I neglected to add.</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(31, 119, 180); display: inline-block; position: relative; top: 5px;"></div> 18 - 24</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(255, 127, 14); display: inline-block; position: relative; top: 5px;"></div> 25-</li>
+    <li><div style="height:20px; width:20px; background-color: rgb(44, 160, 44); display: inline-block; position: relative; top: 5px;"></div></li>
+    <li><div style="height:20px; width:20px; background-color: rgb(214, 39, 40); display: inline-block; position: relative; top: 5px;"></div></li>
+    <li><div style="height:20px; width:20px; background-color: rgb(148, 103, 189); display: inline-block; position: relative; top: 5px;"></div></li>
+  </ul>
+  <p> Remixed by <a href="https://twitter.com/colinmegill">@colinmegill</a> </p>
+</div>
+
+<script src="http://d3js.org/d3.v3.js"></script>
+<script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+
+<script>
+RadarChart.defaultConfig.color = d3.scale.category10();
+// RadarChart.defaultConfig.color = function(){};
+RadarChart.defaultConfig.radius = 3;
+RadarChart.defaultConfig.w = 600;
+RadarChart.defaultConfig.h = 600;
+RadarChart.defaultConfig.axisText = true;
+RadarChart.defaultConfig.axisLine = true;
+RadarChart.defaultConfig.levels = 6;
+
+</script>
+
+<span></span>
+
+<script>
+var data = [
+  {
+    className: '18to24',
+    axes: [
+      {axis: "Online", value: 60}, 
+      {axis: "SocialMedia", value: 21}, 
+      {axis: "Radio", value: 5},  
+      {axis: "Print", value: 6},  
+      {axis: "TV", value: 27}
+    ]
+  },
+  {
+    className: '25_to_34',
+    axes: [
+      {axis: "Online", value: 54}, 
+      {axis: "SocialMedia", value: 13}, 
+      {axis: "Radio", value: 7},  
+      {axis: "Print", value: 6},  
+      {axis: "TV", value: 31}
+    ]
+  },
+  {
+    className: '35_to_44',
+    axes: [
+      {axis: "Online", value: 44}, 
+      {axis: "SocialMedia", value: 8}, 
+      {axis: "Radio", value: 9},
+      {axis: "Print", value: 8},  
+      {axis: "TV", value: 37}
+    ]
+  },
+  {
+    className: '45_to_54',
+    axes: [
+      {axis: "Online", value: 33}, 
+      {axis: "SocialMedia", value: 5}, 
+      {axis: "Radio", value: 8},  
+      {axis: "Print", value: 8},  
+      {axis: "TV", value: 49}
+    ]
+  },
+  {
+    className: '55_plus',
+    axes: [
+      {axis: "Online", value: 22}, 
+      {axis: "SocialMedia", value: 3}, 
+      {axis: "Radio", value: 10},  
+      {axis: "Print", value: 12},  
+      {axis: "TV", value: 54}
+    ]
+  },  
+];
+</script>
+
+<script>
+var chart = RadarChart.chart();
+var cfg = chart.config(); // retrieve default config
+var svg = d3.select('.radarVisualization').append('svg')
+  .attr('width', cfg.w + cfg.w + 50)
+  .attr('height', cfg.h + cfg.h / 4);
+svg.append('g').classed('single', 1).datum(data).call(chart);
+
+// var Format = d3.format('%');
+// var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
+//   //Text indicating at what % each level is
+//   for(var j=0; j<cfg.levels; j++){
+//     var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+//     svg.selectAll(".levels")
+//      .data([1]) //dummy data
+//      .enter()
+//      .append("svg:text")
+//      .attr("x", function(d){return levelFactor*(1-cfg.factor*Math.sin(0));})
+//      .attr("y", function(d){return levelFactor*(1-cfg.factor*Math.cos(0));})
+//      .attr("class", "legend")
+//      .style("font-family", "sans-serif")
+//      .style("font-size", "10px")
+//      .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
+//      .attr("fill", "#737373")
+//      .text(Format((j+1)*cfg.maxValue/cfg.levels));
+//   }
+  
+
+</script>
+</body>
+</html>

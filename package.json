@@ -1,0 +1,14 @@
+{
+  "name": "media_use_by_age",
+  "version": "0.0.0",
+  "description": "News consumption across different age groups, by medium",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.13.0"
+  }
+}
